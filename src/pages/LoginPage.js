@@ -24,15 +24,15 @@ function LoginPage() {
   };
 
   return (
-    <div className="bg-slate-900 w-screen h-screen flex flex-row">
+    <div className="flex bg-slate-900 w-screen h-screen ">
         <section className="intro w-1/2 h-full">
             <div className="rounded-xl p-2 bg-cover h-full">
                 <img className="rounded-xl w-full h-full object-cover" src="/images/bg-login.jpg" />
             </div>
         </section>
-        <section className="login w-1/2 h-full mx-auto p-10 items-center justify-center">
-            <div className="flex-col items-center justify-center h-full">
-                <h2 className="font-bold text-2xl text-white text-center">Sign in</h2>
+        <section className="login flex w-1/2 h-full mx-auto p-10 items-center justify-center">
+            <div className="w-full">
+                <h2 className="font-bold text-2xl text-white text-center">Sign in Chnage</h2>
                 <form className="space-y-4 md:space-y-6">
                     <div>
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Username</label>
