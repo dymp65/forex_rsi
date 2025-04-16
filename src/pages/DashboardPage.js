@@ -22,9 +22,10 @@ function DashboardPage() {
     const [spreadLines, setSpreadLines] = useState([]);
     const [rsiLine, setRsiLine] = useState([]);
     const [currencyLines, setCurrencyLines] = useState([]);
+    const [lastSpread, setLastSpread] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:5050/api/analytics')
+        axios.get(`${process.env.REACT_APP_API_URL}/analytics`)
         .then(res => {
             const data = res.data; // 👈 Axios uses res.data directly
             console.log("API Response:", data);
@@ -35,6 +36,11 @@ function DashboardPage() {
             }
 
             const { spread, rsi, currencies } = data;
+
+            if (Array.isArray(spread.spread) && spread.spread.length > 0){
+                const lastValue = spread.spread.at(-1);
+                setLastSpread(lastValue);
+            }
 
             setSpreadLines([
             {
@@ -101,7 +107,10 @@ function DashboardPage() {
             </section>
             <section className="spread w-screen mt-5 mx-auto max-w-screen-xl">
             <div className="w-full mx-auto">
-                <h2 className="text-left font-bold">Spreads</h2>
+                <div className="flex flex-row space-x-2">
+                    <h2 className="text-left font-bold">Spreads</h2>
+                    <h2>(Last Spread: {lastSpread})</h2>
+                </div>
             </div>
             <div className="w-full mt-2">
                 {spreadLines.length > 0 ? <LineChart lines={spreadLines} /> : <p>Loading...</p>}
